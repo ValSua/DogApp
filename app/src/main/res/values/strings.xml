@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">DogApp</string>
+    <string name="edit_fragment_name">Editar Cita</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
