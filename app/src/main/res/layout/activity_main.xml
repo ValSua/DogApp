@@ -9,10 +9,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="215dp"
-        android:layout_height="223dp"
+        android:layout_width="210dp"
+        android:layout_height="218dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="-31dp"
+        android:layout_marginEnd="-35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/head_48478_960_720" />
