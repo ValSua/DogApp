@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     private fun showBiometricDialog() {
         val executor = ContextCompat.getMainExecutor(this)
         val biometricPrompt = BiometricPrompt(this, executor,
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
                     // Autenticación exitosa, dirigir al usuario a la nueva actividad
-                    val intent = Intent(this@MainActivity, HelloWorldActivity::class.java)
+                    val intent = Intent(this@MainActivity, HomeActivity::class.java)
                     startActivity(intent)
                 }
 
