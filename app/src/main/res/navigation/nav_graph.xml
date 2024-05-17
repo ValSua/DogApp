@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nuevaCitaFragment"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <fragment
+        android:id="@+id/nuevaCitaFragment"
+        android:name="com.example.dogapp.view.fragment.NuevaCitaFragment"
+        android:label="NuevaCitaFragment"
+        tools:layout="@layout/fragment_nueva_cita"/>
+</navigation>
