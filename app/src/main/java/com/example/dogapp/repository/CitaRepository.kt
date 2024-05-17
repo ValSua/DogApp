@@ -1,6 +1,7 @@
 package com.example.dogapp.repository
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.example.dogapp.data.DBCita
 import com.example.dogapp.data.DaoCita
 import com.example.dogapp.data.RetrofitService
@@ -19,6 +20,15 @@ class CitaRepository(val context: Context) {
         }
     }
 
+    fun getCitaById(id: Int): LiveData<Cita> {
+        return daoCita.getCitaById(id)
+    }
+
+    suspend fun updateCita(cita: Cita) {
+        withContext(Dispatchers.IO) {
+            daoCita.editarCita(cita)
+        }
+    }
     suspend fun getListaRazas(): MutableList<String>{
         return withContext(Dispatchers.IO){
             try {
