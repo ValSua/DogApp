@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">DogApp</string>
+    <string name="edit_fragment_name">Editar Cita</string>
+    <!-- TODO: Remove or change this placeholder text -->
     <string-array name="sintomas">
         <item>Síntomas</item>
         <item>Solo duerme</item>

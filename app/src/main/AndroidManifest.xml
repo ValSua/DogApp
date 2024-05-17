@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.INTERNET" />
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> main
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
@@ -15,9 +19,21 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.DogApp"
+<<<<<<< HEAD
         tools:targetApi="31" >
         <activity
             android:name=".DetalleCitaActivity"
+=======
+        tools:targetApi="31">
+        <activity
+            android:name=".CreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".viewmodel.CreateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditActivity"
+>>>>>>> main
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -32,8 +48,12 @@
         <activity
             android:name=".HelloWorldActivity"
             android:exported="true"
+<<<<<<< HEAD
             android:screenOrientation="portrait" >
         </activity>
+=======
+            android:screenOrientation="portrait" />
+>>>>>>> main
 
         <meta-data
             android:name="preloaded_fonts"

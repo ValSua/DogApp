@@ -2,6 +2,7 @@ package com.example.dogapp.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.dogapp.model.Cita
@@ -36,10 +37,22 @@ class CitaViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
+    fun getCitaById(id: Int): LiveData<Cita> {
+        return citaRepository.getCitaById(id)
+    }
+
+    fun updateCita(cita: Cita) {
+        viewModelScope.launch {
+            citaRepository.updateCita(cita)
+        }
+    }
+
     fun getListaRazas() {
         viewModelScope.launch {
             _listaRazas.value = citaRepository.getListaRazas()
         }
     }
+
+
 
 }
