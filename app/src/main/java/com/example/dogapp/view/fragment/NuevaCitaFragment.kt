@@ -11,7 +11,6 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.dogapp.R
 import com.example.dogapp.databinding.FragmentNuevaCitaBinding
 import com.example.dogapp.model.Cita
 import com.example.dogapp.viewmodel.CitaViewModel
@@ -52,12 +51,13 @@ class NuevaCitaFragment : Fragment() {
             if(binding.spinnerSintomas.selectedItem.toString() == "Síntomas"){
                 Toast.makeText(context, "Selecciona un síntoma", Toast.LENGTH_SHORT).show()
             } else {
+
                 val mascota = binding.ietMascota.text.toString()
                 val raza = binding.ietRaza.text.toString()
                 val telefono = binding.ietTelefono.text.toString()
                 val propietario = binding.ietPropietario.text.toString()
                 val sintoma = binding.spinnerSintomas.selectedItem.toString()
-                val cita = Cita(mascota, raza, propietario, telefono, sintoma, "")
+                val cita = Cita(mascota, raza, propietario, telefono, sintoma,  "img")
                 citaViewModel.agregarCita(cita)
                 findNavController().popBackStack()
             }
