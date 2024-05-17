@@ -1,21 +1,20 @@
+package com.example.dogapp
+
+
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
-import android.widget.Toast
+import android.widget.ImageButton
+import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.lifecycleScope
-import com.example.dogapp.R
-import com.example.dogapp.database.Mascota
-import com.example.dogapp.database.MascotaDatabase
 import com.example.dogapp.databinding.ActivityDetalleCitaBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.example.dogapp.viewmodel.CitaViewModel
+
 
 class DetalleCitaActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetalleCitaBinding
-    private lateinit var mascotaDatabase: MascotaDatabase
-    private var mascotaId: Int = 0
+    private val citaViewModel: CitaViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,65 +22,43 @@ class DetalleCitaActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Toolbar configuration
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar_nombre)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //obtener la cita actual
+        val citaId = intent.getIntExtra("CITA_ID", -1)
 
-        mascotaDatabase = MascotaDatabase.getDatabase(this)
+        val btnEnviarDatos = findViewById<ImageButton>(R.id.btnedit)
+        val textraza  = findViewById<TextView>(R.id.razaperro)
+        val textsint  = findViewById<TextView>(R.id.sintoma)
+        val textprop  = findViewById<TextView>(R.id.propietario)
+        val texttel  = findViewById<TextView>(R.id.tel)
+        val btnedit = findViewById<ImageButton>(R.id.btnedit)
 
-        mascotaId = intent.getIntExtra("mascotaId", 0)
+        // Configuración del clic en el ícono de navegación
+        toolbar.setNavigationOnClickListener {
+            // Cierra esta actividad y regresa a la actividad anterior
+            finish()
+        }
 
-        lifecycleScope.launch {
-            val mascota = getMascota(mascotaId)
-            if (mascota != null) {
-                withContext(Dispatchers.Main) {
-                    mostrarDetalles(mascota)
-                }
-            } else {
-                Toast.makeText(this@DetalleCitaActivity, "Mascota no encontrada", Toast.LENGTH_SHORT).show()
+        citaViewModel.getCitaById(citaId).observe(this) { cita ->
+            cita?.let {
+                textraza.setText(it.raza)
+                textsint.setText(it.sintoma)
+                textprop.setText(it.nombrePropietario)
+                texttel.setText(it.tele)
             }
         }
 
-        binding.deleteButton.setOnClickListener {
-            eliminarMascota()
+
+        btnedit.setOnClickListener{
+            val intent = Intent(this, EditActivity::class.java)
+            intent.putExtra("CITA_ID",citaId)
+            startActivity(intent)
         }
 
-        binding.editButton.setOnClickListener {
-            // Navegar a la actividad de edición (HU 5.0)
-            // ...
-        }
     }
 
-    private suspend fun getMascota(mascotaId: Int): Mascota? = withContext(Dispatchers.IO) {
-        mascotaDatabase.mascotaDao().getById(mascotaId)
-    }
 
-    private fun mostrarDetalles(mascota: Mascota) {
-        supportActionBar?.title = mascota.nombreMascota
 
-        binding.razaTextView.text = mascota.raza
-        binding.sintomasTextView.text = mascota.sintomas
-        binding.propietarioTextView.text = mascota.nombrePropietario
-        binding.telefonoTextView.text = mascota.telefono
-        // ... (cargar imagen de la mascota usando Glide o Picasso)
-    }
 
-    private fun eliminarMascota() {
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                mascotaDatabase.mascotaDao().delete(mascotaId)
-            }
-            finish() // Regresar a la actividad anterior (HU 2.0)
-        }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                finish()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
 }
