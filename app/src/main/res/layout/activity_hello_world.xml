@@ -21,6 +21,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="editar"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+         />
+
+    <Button
+        android:id="@+id/btn_nueva_Cita"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="crear"
+        tools:ignore="MissingConstraints"
+        android:layout_marginTop="200dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
