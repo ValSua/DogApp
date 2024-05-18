@@ -27,6 +27,16 @@ class HelloWorldActivity : FragmentActivity() {
             val intent = Intent(this, CreateActivity::class.java)
             startActivity(intent)
         }
+
+        val botonEditarCita: Button = findViewById(R.id.btn_editar_Cita)
+
+
+        botonEditarCita.setOnClickListener {
+            // Iniciar com.example.dogapp.EditActivity cuando se haga clic en el botón
+            val intent = Intent(this, EditActivity::class.java)
+            intent.putExtra("CITA_ID",1)
+            startActivity(intent)
+        }
     }
 
     override fun onBackPressed() {
